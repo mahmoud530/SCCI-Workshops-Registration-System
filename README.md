@@ -53,5 +53,4 @@ Participants can register for their preferred workshops, and each workshop has i
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/mahmoud530/SCCI-Workshops-Registration-System
-.git
+   git clone https://github.com/mahmoud530/SCCI-Workshops-Registration-System.git
