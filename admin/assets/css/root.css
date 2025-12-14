@@ -1,0 +1,383 @@
+/* ===== CSS Variables ===== */
+:root {
+  /* Primary Colors */
+  --primary-red: #c71f0c;
+  --primary-blue: #3a7bd5;
+  --primary-blue-dark: #041c45;
+
+  /* Neutral Colors */
+  --gray-light: #f9fafb;
+  --gray-medium: #e5e7eb;
+  --gray-dark: #374151;
+  --white: #ffffff;
+
+  /* Text Colors */
+  --text-dark: #111827;
+  --text-medium: #4b5563;
+  --text-light: #6b7280;
+
+  /* Status Colors */
+  --success: #10b981;
+  --success-light: #d1fae5;
+  --warning: #f59e0b;
+  --warning-light: #fef3c7;
+  --error: #ef4444;
+  --error-light: #fee2e2;
+
+  /* Spacing - استخدام clamp للتكيف التلقائي */
+  --space-xs: clamp(3px, 0.5vw, 4px);
+  --space-sm: clamp(6px, 1vw, 8px);
+  --space-md: clamp(12px, 2vw, 16px);
+  --space-lg: clamp(18px, 3vw, 24px);
+  --space-xl: clamp(24px, 4vw, 32px);
+  --space-2xl: clamp(32px, 5vw, 40px);
+  
+  /* Border Radius */
+  --radius-small: clamp(6px, 1vw, 8px);
+  --radius: clamp(10px, 1.5vw, 12px);
+  --radius-large: clamp(12px, 2vw, 16px);
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.16);
+  
+  /* Transitions */
+  --transition: all 0.3s ease;
+  --transition-fast: all 0.15s ease;
+  
+  /* Typography - استخدام clamp للنصوص المتجاوبة */
+  --font-sm: clamp(12px, 2vw, 14px);
+  --font-md: clamp(14px, 2.5vw, 16px);
+  --font-lg: clamp(16px, 3vw, 18px);
+  --font-xl: clamp(20px, 4vw, 24px);
+  --font-2xl: clamp(24px, 5vw, 32px);
+  
+  /* Container Padding - متغير ديناميكي */
+  --container-padding: clamp(16px, 4vw, 40px);
+}
+
+/* ===== Reset & Base Styles ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  /* منع التكبير على iOS عند التركيز على الـ input */
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  background: linear-gradient(135deg, var(--gray-light) 0%, #f3f4f6 100%);
+  color: var(--text-dark);
+  line-height: 1.6;
+  padding: var(--space-md);
+  min-height: 100vh;
+  font-size: var(--font-md);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* منع التمرير الأفقي */
+  overflow-x: hidden;
+}
+
+/* ===== Main Container ===== */
+.container {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  background: var(--white);
+  border-radius: var(--radius-large);
+  padding: var(--container-padding);
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-blue), var(--primary-red), var(--success));
+  border-radius: var(--radius-large) var(--radius-large) 0 0;
+}
+
+.container:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+/* ===== Scroll to Top Button ===== */
+.scroll-to-top {
+  position: fixed;
+  bottom: var(--space-xl);
+  right: var(--space-xl);
+  background: var(--primary-blue);
+  color: var(--white);
+  border: none;
+  border-radius: 50%;
+  width: clamp(45px, 10vw, 50px);
+  height: clamp(45px, 10vw, 50px);
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  transition: var(--transition);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(18px, 4vw, 20px);
+}
+
+.scroll-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.scroll-to-top:hover {
+  background: var(--primary-blue-dark);
+  transform: translateY(-2px);
+}
+
+.scroll-to-top:active {
+  transform: translateY(0);
+}
+
+/* ===== Form Elements (مشتركة) ===== */
+.form-group {
+  margin-bottom: var(--space-lg);
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: var(--space-sm);
+  color: var(--text-medium);
+  font-weight: 600;
+  font-size: var(--font-sm);
+}
+
+.form-group select,
+.form-group input {
+  width: 100%;
+  padding: var(--space-md) var(--space-lg);
+  border: 2px solid var(--gray-medium);
+  border-radius: var(--radius);
+  font-size: var(--font-md);
+  transition: var(--transition-fast);
+  background: var(--white);
+  /* منع التكبير التلقائي على iOS */
+  font-size: 16px;
+}
+
+.form-group select::placeholder,
+.form-group input::placeholder {
+  color: var(--text-light);
+  opacity: 0.7;
+}
+
+.form-group select:focus,
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 4px rgba(58, 123, 213, 0.1);
+}
+
+/* ===== Error Messages ===== */
+.error {
+  color: var(--error);
+  margin: var(--space-md) 0;
+  padding: var(--space-md);
+  background: var(--error-light);
+  border-radius: var(--radius);
+  border: 1px solid var(--error);
+  font-weight: 500;
+  font-size: var(--font-sm);
+  word-wrap: break-word;
+}
+
+/* ===== Responsive Design - تحسينات شاملة ===== */
+
+/* Tablets الكبيرة */
+@media (max-width: 1024px) {
+  .container {
+    max-width: 95%;
+  }
+  
+  .scroll-to-top {
+    bottom: var(--space-lg);
+    right: var(--space-lg);
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  :root {
+    --container-padding: clamp(12px, 3vw, 24px);
+  }
+  
+  body {
+    padding: var(--space-sm);
+  }
+
+  .container {
+    padding: var(--space-lg);
+    border-radius: var(--radius);
+    max-width: 100%;
+  }
+  
+  .scroll-to-top {
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+    bottom: var(--space-md);
+    right: var(--space-md);
+  }
+}
+
+/* الهواتف الكبيرة */
+@media (max-width: 640px) {
+  body {
+    padding: var(--space-xs);
+  }
+  
+  .container {
+    padding: var(--space-md);
+    border-radius: var(--radius-small);
+  }
+  
+  .form-group select,
+  .form-group input {
+    padding: var(--space-sm) var(--space-md);
+  }
+}
+
+/* الهواتف الصغيرة */
+@media (max-width: 480px) {
+  :root {
+    --container-padding: 12px;
+  }
+  
+  body {
+    padding: 0;
+    background: var(--white);
+  }
+  
+  .container {
+    padding: var(--space-md);
+    border-radius: 0;
+    box-shadow: none;
+  }
+  
+  .container::before {
+    border-radius: 0;
+  }
+  
+  .scroll-to-top {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    bottom: 16px;
+    right: 16px;
+  }
+  
+  .error {
+    font-size: 13px;
+    padding: 10px;
+  }
+}
+
+/* الهواتف الصغيرة جداً */
+@media (max-width: 360px) {
+  .container {
+    padding: 8px;
+  }
+  
+  .form-group select,
+  .form-group input {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+  
+  .scroll-to-top {
+    width: 36px;
+    height: 36px;
+    bottom: 12px;
+    right: 12px;
+  }
+}
+
+/* Landscape Orientation للهواتف */
+@media (max-height: 500px) and (orientation: landscape) {
+  .scroll-to-top {
+    width: 40px;
+    height: 40px;
+    bottom: 12px;
+    right: 12px;
+  }
+  
+  .container {
+    padding: var(--space-sm);
+  }
+}
+
+/* دعم الشاشات الكبيرة جداً */
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1600px;
+  }
+}
+
+/* ===== Print Styles ===== */
+@media print {
+  body {
+    background: var(--white);
+    padding: 0;
+  }
+
+  .container {
+    box-shadow: none;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    max-width: 100%;
+    padding: 20px;
+  }
+  
+  .container::before {
+    display: none;
+  }
+
+  .scroll-to-top {
+    display: none;
+  }
+  
+  .error {
+    border: 1px solid #000;
+    background: #fff;
+  }
+}
+
+/* ===== دعم الوضع المظلم (اختياري) ===== */
+@media (prefers-color-scheme: dark) {
+  /* يمكن إضافة أنماط للوضع المظلم هنا إذا لزم الأمر */
+}
+
+/* ===== تحسينات الأداء ===== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
