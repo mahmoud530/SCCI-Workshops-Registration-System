@@ -19,27 +19,7 @@ A comprehensive workshop registration and management system built with PHP, MySQ
 
 ---
 
-## 📖 Table of Contents
 
-- [About](#about)
-- [Features](#features)
-- [Technologies](#technologies)
-- [System Requirements](#system-requirements)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Database Schema](#database-schema)
-- [Security Features](#security-features)
-- [Performance Optimization](#performance-optimization)
-- [Admin Dashboard](#admin-dashboard)
-- [API Endpoints](#api-endpoints)
-- [File Structure](#file-structure)
-- [Screenshots](#screenshots)
-- [Troubleshooting](#troubleshooting)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
-
----
 
 ## 🎯 About
 
